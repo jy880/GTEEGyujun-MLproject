@@ -143,21 +143,22 @@ class MLP(torch.nn.Module):
         self.fc2 = torch.nn.Linear(25, 1)
         self.dropout = torch.nn.Dropout(0.5)
         self.relu = torch.nn.ReLU()
+        self.leaky_relu = torch.nn.LeakyReLU(0.01)
         self.bn1 = torch.nn.BatchNorm1d(25)
         self.bn2 = torch.nn.BatchNorm1d(1)
     
     def forward(self, x):
         x = self.fc1(x)
         x = self.bn1(x)
-        x = self.relu(x)
-        x = self.dropout(x)
+        x = self.leaky_relu(x)
+        #x = self.dropout(x)
         x = self.fc2(x)
         x = self.bn2(x)
-        x = self.relu(x)
-        x = self.dropout(x)
+        x = self.leaky_relu(x)
+        #x = self.dropout(x)
         #x = self.fc3(x)
         #x = self.bn3(x)
-        #x = self.relu(x)
+        #x = self.leaky_relu(x)
         #x = self.dropout(x)
         return x
 
@@ -218,7 +219,7 @@ for epoch in range(0, nb_epochs):
     scheduler.step(mean_loss)
 
 #print('Loss (epoch: %4d): %.8f' %(epoch+1, mean_loss))
-# Print the loss only every 50 epochs
+# Print the loss only every 10 epochs
     if (epoch + 1) % 50 == 0:
         print('Loss (epoch: %4d): %.8f' % (epoch + 1, mean_loss))
     current_loss = 0.0
@@ -618,4 +619,3 @@ print(verilog_code)
 
 with open("iwo_test.va", "w") as f:
     f.write(verilog_code)
-
