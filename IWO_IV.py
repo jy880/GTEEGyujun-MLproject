@@ -139,14 +139,12 @@ print(CM_lit)
 class MLP(torch.nn.Module):
     def __init__(self):
         super(MLP, self).__init__()
-        self.fc1 = torch.nn.Linear(3, 50)
-        self.fc2 = torch.nn.Linear(50, 25)
-        self.fc3 = torch.nn.Linear(25, 1)
+        self.fc1 = torch.nn.Linear(3, 25)
+        self.fc2 = torch.nn.Linear(25, 1)
         self.dropout = torch.nn.Dropout(0.5)
         self.relu = torch.nn.ReLU()
-        self.bn1 = torch.nn.BatchNorm1d(50)
-        self.bn2 = torch.nn.BatchNorm1d(25)
-        self.bn3 = torch.nn.BatchNorm1d(1)
+        self.bn1 = torch.nn.BatchNorm1d(25)
+        self.bn2 = torch.nn.BatchNorm1d(1)
     
     def forward(self, x):
         x = self.fc1(x)
@@ -157,10 +155,10 @@ class MLP(torch.nn.Module):
         x = self.bn2(x)
         x = self.relu(x)
         x = self.dropout(x)
-        x = self.fc3(x)
-        x = self.bn3(x)
-        x = self.relu(x)
-        x = self.dropout(x)
+        #x = self.fc3(x)
+        #x = self.bn3(x)
+        #x = self.relu(x)
+        #x = self.dropout(x)
         return x
 
 # Create an instance of the MLP class
