@@ -32,8 +32,8 @@ os.getcwd()
 
 start = time.time()
 
-idvg_temp = pd.read_csv(r'/content/drive/MyDrive/ColabNotebooks/idvg_iwo_0206.csv', encoding='utf8')
-cv_temp = pd.read_csv(r'/content/drive/MyDrive/ColabNotebooks/cv_iwo_0212_dataset.csv', encoding='utf8')
+idvg_temp = pd.read_csv(r'/content/GTEEGyujun-MLproject/Datasets/idvg_iwo_0206.csv', encoding='utf8')
+cv_temp = pd.read_csv(r'/content/GTEEGyujun-MLproject/Datasets/cv_iwo_0212_dataset.csv', encoding='utf8')
 #cv_temp=pd.read_csv(r'./cv_iwo_0206.csv', encoding='utf8')
 # idvg=idvg_temp.values
 
