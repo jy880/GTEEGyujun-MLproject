@@ -166,7 +166,7 @@ model = MLP()
 
 torch.nn.init.xavier_uniform(model.fc1.weight)
 torch.nn.init.xavier_uniform(model.fc2.weight)
-torch.nn.init.xavier_uniform(model.fc3.weight)
+# torch.nn.init.xavier_uniform(model.fc3.weight)
 # torch.nn.init.xavier_uniform(model.fc4.weight)
 
 loss_function = nn.MSELoss()
