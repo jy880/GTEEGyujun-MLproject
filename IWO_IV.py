@@ -32,8 +32,9 @@ os.getcwd()
 
 start = time.time()
 
-idvg_temp=pd.read_csv(r'./idvg_iwo_0206.csv', encoding='utf8')
-cv_temp=pd.read_csv(r'./cv_iwo_0206.csv', encoding='utf8')
+idvg_temp = pd.read_csv(r'/content/drive/MyDrive/ColabNotebooks/idvg_iwo_0206.csv', encoding='utf8')
+cv_temp = pd.read_csv(r'/content/drive/MyDrive/ColabNotebooks/cv_iwo_0212_dataset.csv', encoding='utf8')
+#cv_temp=pd.read_csv(r'./cv_iwo_0206.csv', encoding='utf8')
 # idvg=idvg_temp.values
 
 lch = [0.05, 0.055, 0.06, 0.065, 0.07, 0.075, 0.08, 0.09]
@@ -202,7 +203,6 @@ for epoch in range(0, nb_epochs):
 
         #perform backward pass
         loss.backward()
-
         #perform optimization
         optimizer.step()
         # Print statistics
@@ -210,10 +210,18 @@ for epoch in range(0, nb_epochs):
     mean_loss = sum(losses)/len(losses)
     scheduler.step(mean_loss)
 
-    print('Loss (epoch: %4d): %.8f' %(epoch+1, mean_loss))
+#print('Loss (epoch: %4d): %.8f' %(epoch+1, mean_loss))
+# Print the loss only every 50 epochs
+    if (epoch + 1) % 50 == 0:
+        print('Loss (epoch: %4d): %.8f' % (epoch + 1, mean_loss))
     current_loss = 0.0
-    
     MLoss.append(mean_loss)
+    optimizer.step()
+        # Print statistics
+    mean_loss = sum(losses) / len(losses)
+    scheduler.step(mean_loss)
+
+
 # Process is complete.
 print('Training process has finished.')
 
