@@ -142,7 +142,7 @@ class MLP(torch.nn.Module):
         self.fc1 = torch.nn.Linear(3, 25)
         self.fc2 = torch.nn.Linear(25, 12)
         self.fc3 = torch.nn.Linear(12, 1)
-        self.dropout = torch.nn.Dropout(0.5)
+        self.dropout = torch.nn.Dropout(0.2)
         self.tanh = torch.nn.Tanh()
         self.relu = torch.nn.ReLU()
         self.leaky_relu = torch.nn.LeakyReLU(0.01)
@@ -173,7 +173,8 @@ torch.nn.init.xavier_uniform(model.fc3.weight)
 # torch.nn.init.xavier_uniform(model.fc4.weight)
 
 loss_function = nn.MSELoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+#optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08)
 #optimizer = torch.optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=5)
 
