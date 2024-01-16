@@ -141,18 +141,27 @@ class MLP(torch.nn.Module):
         super(MLP, self).__init__()
         self.fc1 = torch.nn.Linear(3, 25)
         self.fc2 = torch.nn.Linear(25, 12)
-        # self.fc3 = torch.nn.Linear(20, 5)
         self.fc3 = torch.nn.Linear(12, 1)
+        self.dropout = torch.nn.Dropout(0.2)
         self.tanh = torch.nn.Tanh()
+        self.relu = torch.nn.ReLU()
+        self.leaky_relu = torch.nn.LeakyReLU(0.01)
+        self.bn1 = torch.nn.BatchNorm1d(25)
+        self.bn2 = torch.nn.BatchNorm1d(12)
+        self.bn3 = torch.nn.BatchNorm1d(1)
     
     def forward(self, x):
         x = self.fc1(x)
-        x = self.tanh(x)
+        #x = self.bn1(x)
+        x = self.leaky_relu(x)
+        #x = self.dropout(x)
         x = self.fc2(x)
-        x = self.tanh(x)
+        #x = self.bn2(x)
+        x = self.leaky_relu(x)
+        #x = self.dropout(x)
         x = self.fc3(x)
-        # x = self.tanh(x)
-        # x = self.fc4(x)
+        #x = self.bn3(x)
+        #x = self.tanh(x)
         return x
 
 # Create an instance of the MLP class
@@ -164,7 +173,9 @@ torch.nn.init.xavier_uniform(model.fc3.weight)
 # torch.nn.init.xavier_uniform(model.fc4.weight)
 
 loss_function = nn.MSELoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+#optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08)
+#optimizer = torch.optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=5)
 
 # losses = []
@@ -211,8 +222,8 @@ for epoch in range(0, nb_epochs):
     scheduler.step(mean_loss)
 
 #print('Loss (epoch: %4d): %.8f' %(epoch+1, mean_loss))
-# Print the loss only every 50 epochs
-    if (epoch + 1) % 50 == 0:
+# Print the loss only every 10 epochs
+    if (epoch + 1) % 10 == 0:
         print('Loss (epoch: %4d): %.8f' % (epoch + 1, mean_loss))
     current_loss = 0.0
     MLoss.append(mean_loss)
@@ -611,4 +622,3 @@ print(verilog_code)
 
 with open("iwo_test.va", "w") as f:
     f.write(verilog_code)
-
