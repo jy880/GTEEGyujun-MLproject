@@ -1,6 +1,7 @@
 # GTEEGyujun-MLproject
 
-- Main: Main branch
-- Optimization-branch: Implementing ML optimization - Dropout, ReLu, BatchNorm, Rate, etc.
-- CNN-branch: CNN Model implementation
-- RNN-branch: RNN Model implementation: LSTM, GRU
+- main: Main branch
+- mlp-optimization: Implementing MLP optimization - Dropout, ReLu, BatchNorm, Rate, etc.
+- cnn-model: CNN Model implementation
+- rnn-model: RNN Model implementation: LSTM, GRU
+- pinn-model: PINN (Physics-Informed NN) implementation
