@@ -6,5 +6,4 @@
 - rnn-model: RNN Model implementation: LSTM, GRU
 - pinn-model: PINN (Physics-Informed NN) implementation
   https://towardsdatascience.com/solving-differential-equations-with-neural-networks-afdcf7b8bcc4
-- elu-fitting: ELU (Exponential-ReLu) Verilog-A curve fitting
-  https://paperswithcode.com/method/elu
+- elu-fitting: Verilog-A curve fitting function modification (e.g., ELU, softsign)
